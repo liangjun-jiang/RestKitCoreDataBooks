@@ -260,7 +260,6 @@
                                                                                        pathPattern:nil
                                                                                            keyPath:nil
                                                                                        statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-//    [objectManager addResponseDescriptor:responseDescriptor];
     [objectManager addResponseDescriptorsFromArray:@[errorDescriptor, responseDescriptor, postResponseDescriptor]];
     
     //http://stackoverflow.com/questions/15089405/restkit-0-20-post-coredata-relationship-with-foreign-key
@@ -272,9 +271,12 @@
 //                                                                                   toKeyPath:@"album"
 //                                                                                 withMapping:albumRelationshipMapping]];
     
-    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Book class] rootKeyPath:nil method:RKRequestMethodPOST];
+    RKRequestDescriptor *postDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Book class] rootKeyPath:nil method:RKRequestMethodPOST];
     
-    [objectManager addRequestDescriptor:requestDescriptor];
+    RKRequestDescriptor *putDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Book class] rootKeyPath:nil method:RKRequestMethodPUT];
+    RKRequestDescriptor *deleteDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Book class] rootKeyPath:nil method:RKRequestMethodDELETE];
+    [objectManager addRequestDescriptorsFromArray:@[postDescriptor, putDescriptor, deleteDescriptor]];
+//    [objectManager addRequestDescriptor:requestDescriptor];
    
     /**
      Complete Core Data stack initialization

@@ -76,6 +76,7 @@
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Load failed with error: %@", error);
     }];
+    
     [self.delegate addViewController:self didFinishWithSave:YES];
 }
 
