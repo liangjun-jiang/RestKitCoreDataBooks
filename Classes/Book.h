@@ -55,7 +55,7 @@
 @property (nonatomic, strong) NSString *createdAt;
 @property (nonatomic, strong) NSString *updatedAt;
 
-@property (nonatomic, strong) NSDate *copyright;
+@property (nonatomic, strong) NSString *copyright;
 
 @end
 

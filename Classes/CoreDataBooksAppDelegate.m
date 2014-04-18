@@ -238,9 +238,7 @@
     objectManager.managedObjectStore = managedObjectStore;
     
     RKEntityMapping *bookMapping = [RKEntityMapping mappingForEntityForName:@"Book" inManagedObjectStore:managedObjectStore];
-//    [bookMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"objectId" toKeyPath:@"objectId"]];
-//    [bookMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"createdAt" toKeyPath:nil]];
-//    [bookMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:@"updatedAt" toKeyPath:nil]];
+    bookMapping.identificationAttributes=@[@"objectId"];
     [bookMapping addAttributeMappingsFromArray:[Book arrayForResponseMapping]];
     
 //    NSDateFormatter *dateFormatter = [NSDateFormatter new];

@@ -141,7 +141,7 @@
     
     self.authorLabel.text = self.book.author;
     self.titleLabel.text = self.book.title;
-    self.copyrightLabel.text = [self.dateFormatter stringFromDate:self.book.copyright];
+    self.copyrightLabel.text = self.book.copyright;
 }
 
 - (void)updateRightBarButtonItemState {
