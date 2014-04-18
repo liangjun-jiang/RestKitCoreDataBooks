@@ -11,12 +11,12 @@
 @implementation Book (Addition)
 +(NSArray *)arrayForResponseMapping
 {
-    return @[@"title",@"author", @"copyright", @"objectId",@"createdAt",@"updatedAt"];
+    return @[@"title",@"author", @"copyright", @"objectId",@"createdAt",@"updatedAt",@"sessionToken"];
 }
 
 +(NSDictionary *)dictionaryForResponseMapping
 {
-    return @{@"title":@"title",@"author":@"author", @"copyright":@"copyright"};
+    return @{@"title":@"title",@"author":@"author", @"copyright":@"copyright",@"sessionToken":@"sessionToken"};
     
 }
 @end

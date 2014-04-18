@@ -18,4 +18,5 @@
 @dynamic createdAt;
 @dynamic updatedAt;
 @dynamic objectId;
+@dynamic sessionToken;
 @end

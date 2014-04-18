@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * createdAt;
 @property (nonatomic, retain) NSString * updatedAt;
+@property (nonatomic, retain) NSString * sessionToken;
 
 
 

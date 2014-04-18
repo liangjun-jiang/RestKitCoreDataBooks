@@ -9,13 +9,13 @@
 #import "RootViewController.h"
 #import "DetailViewController.h"
 #import "Book.h"
-
+#import "User.h"
 
 @interface RootViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
-
+@property (nonatomic, strong) User *user;
 @end
 
 
@@ -37,14 +37,29 @@
     
 }
 
-
-- (void)viewDidLoad {
+- (void)createAUser
+{
+    self.user = (User *)[NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext];
+    self.user.username = @"LJiang4";
+    self.user.password = @"secret4";
+    self.user.email = @"ljiang4@ljapps.com";
     
+    [[RKObjectManager sharedManager] postObject:self.user path:@"/1/users" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+         RKLogInfo(@"Load complete: Table should refresh...%@", [mappingResult.array firstObject]);
+        NSLog(@"so the user is : %@",self.user);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Load failed with error: %@", error);
+    }];
+}
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     // Set up the edit and add buttons.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-        
+    
+    [self createAUser];
+    
+    
     NSError *error;
     if (![[self fetchedResultsController] performFetch:&error]) {
         /*
@@ -287,6 +302,7 @@
 //        addViewController.book = newBook;
 //        addViewController.managedObjectContext = addingContext;
         Book *newBook = (Book *)[NSEntityDescription insertNewObjectForEntityForName:@"Book" inManagedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext];
+        newBook.user = self.user;
         addViewController.book = newBook;
         addViewController.managedObjectContext = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
     }
