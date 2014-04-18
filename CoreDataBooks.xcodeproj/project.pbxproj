@@ -28,12 +28,14 @@
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		28C95B0B0F4F9A7F0037F30F /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C95B080F4F9A7F0037F30F /* AddViewController.m */; };
 		28C95B0C0F4F9A7F0037F30F /* EditingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C95B0A0F4F9A7F0037F30F /* EditingViewController.m */; };
-		28C95B0F0F4F9A880037F30F /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C95B0E0F4F9A880037F30F /* Book.m */; };
 		53C48EC717B93950000644F8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53C48EC417B93950000644F8 /* Default-568h@2x.png */; };
 		53C48EC817B93950000644F8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 53C48EC517B93950000644F8 /* Default.png */; };
 		53C48EC917B93950000644F8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53C48EC617B93950000644F8 /* Default@2x.png */; };
 		53C48ECC17B939B8000644F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 53C48ECA17B939B8000644F8 /* Localizable.strings */; };
 		7D90EB0319016C6200825FF9 /* Book+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D90EB0219016C6200825FF9 /* Book+Addition.m */; };
+		7D90EB111901C44600825FF9 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D90EB101901C44600825FF9 /* Book.m */; };
+		7D90EB141901C46400825FF9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D90EB131901C46400825FF9 /* User.m */; };
+		7D90EB171901C4C200825FF9 /* User+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D90EB161901C4C200825FF9 /* User+Addition.m */; };
 		DC6743904BA74DF2B3B20CF5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E03401639F214B00B46C3537 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -66,8 +68,6 @@
 		28C95B080F4F9A7F0037F30F /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddViewController.m; path = Classes/AddViewController.m; sourceTree = "<group>"; };
 		28C95B090F4F9A7F0037F30F /* EditingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditingViewController.h; path = Classes/EditingViewController.h; sourceTree = "<group>"; };
 		28C95B0A0F4F9A7F0037F30F /* EditingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditingViewController.m; path = Classes/EditingViewController.m; sourceTree = "<group>"; };
-		28C95B0D0F4F9A880037F30F /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Book.h; path = Classes/Book.h; sourceTree = "<group>"; };
-		28C95B0E0F4F9A880037F30F /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Book.m; path = Classes/Book.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		53C48EC417B93950000644F8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "images/Default-568h@2x.png"; sourceTree = "<group>"; };
 		53C48EC517B93950000644F8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = images/Default.png; sourceTree = "<group>"; };
@@ -75,6 +75,12 @@
 		53C48ECB17B939B8000644F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7D90EB0119016C6200825FF9 /* Book+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Book+Addition.h"; path = "Classes/Book+Addition.h"; sourceTree = "<group>"; };
 		7D90EB0219016C6200825FF9 /* Book+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Book+Addition.m"; path = "Classes/Book+Addition.m"; sourceTree = "<group>"; };
+		7D90EB0F1901C44600825FF9 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Book.h; path = Classes/Book.h; sourceTree = "<group>"; };
+		7D90EB101901C44600825FF9 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Book.m; path = Classes/Book.m; sourceTree = "<group>"; };
+		7D90EB121901C46400825FF9 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Classes/User.h; sourceTree = "<group>"; };
+		7D90EB131901C46400825FF9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Classes/User.m; sourceTree = "<group>"; };
+		7D90EB151901C4C200825FF9 /* User+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+Addition.h"; path = "Classes/User+Addition.h"; sourceTree = "<group>"; };
+		7D90EB161901C4C200825FF9 /* User+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "User+Addition.m"; path = "Classes/User+Addition.m"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		E03401639F214B00B46C3537 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -148,10 +154,14 @@
 		28921A570F4CF0D0000D3C06 /* Model Class */ = {
 			isa = PBXGroup;
 			children = (
-				28C95B0D0F4F9A880037F30F /* Book.h */,
-				28C95B0E0F4F9A880037F30F /* Book.m */,
+				7D90EB121901C46400825FF9 /* User.h */,
+				7D90EB131901C46400825FF9 /* User.m */,
 				7D90EB0119016C6200825FF9 /* Book+Addition.h */,
 				7D90EB0219016C6200825FF9 /* Book+Addition.m */,
+				7D90EB0F1901C44600825FF9 /* Book.h */,
+				7D90EB101901C44600825FF9 /* Book.m */,
+				7D90EB151901C4C200825FF9 /* User+Addition.h */,
+				7D90EB161901C4C200825FF9 /* User+Addition.m */,
 			);
 			name = "Model Class";
 			sourceTree = "<group>";
@@ -318,13 +328,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D90EB141901C46400825FF9 /* User.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				7D90EB111901C44600825FF9 /* Book.m in Sources */,
+				7D90EB171901C4C200825FF9 /* User+Addition.m in Sources */,
 				1D3623260D0F684500981E51 /* CoreDataBooksAppDelegate.m in Sources */,
 				28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */,
 				28921A430F4CEE8D000D3C06 /* DetailViewController.m in Sources */,
 				28C95B0B0F4F9A7F0037F30F /* AddViewController.m in Sources */,
 				28C95B0C0F4F9A7F0037F30F /* EditingViewController.m in Sources */,
-				28C95B0F0F4F9A880037F30F /* Book.m in Sources */,
 				2858AAB61528CA9400A1E836 /* CoreDataBooks.xcdatamodeld in Sources */,
 				7D90EB0319016C6200825FF9 /* Book+Addition.m in Sources */,
 			);
