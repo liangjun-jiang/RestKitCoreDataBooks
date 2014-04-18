@@ -134,6 +134,14 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
+        
+        [[RKObjectManager sharedManager] postObject:self.book path:@"/1/classes/Book" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            RKLogInfo(@"Load complete: Table should refresh...%@", mappingResult);
+        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+            RKLogError(@"Load failed with error: %@", error);
+        }];
+        
+        
     }
 }
 

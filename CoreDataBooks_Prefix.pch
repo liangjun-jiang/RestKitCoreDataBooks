@@ -10,6 +10,6 @@
     #import <RestKit/CoreData.h>
 #endif
 
-static NSString *API_BASE_URL = @"https://api.parse.com";
+static NSString *API_BASE_URL = @"https://api.parse.com/1/";
 static NSString *API_APP_ID = @"E5yS37E1QoB1OD0ZwHJUAW2qKWiz77DQsLu3uGpg";
 static NSString *API_APP_TOKEN = @"8Dh6VdotwJcoME4o9Nu3x8ooqnTjAQGZyjkrQdTe";

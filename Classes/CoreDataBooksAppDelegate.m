@@ -75,9 +75,6 @@
 {
     
     [self setupEntityMapping];
-//    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-//    RootViewController *rootViewController = (RootViewController *)[[navigationController viewControllers] objectAtIndex:0];
-//    rootViewController.managedObjectContext = self.managedObjectContext;
 }
 
 
@@ -226,7 +223,7 @@
 {
     NSURL *baseURL = [NSURL URLWithString:API_BASE_URL];
     RKObjectManager *objectManager = [RKObjectManager managerWithBaseURL:baseURL];
-    
+    objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
     [objectManager.HTTPClient setDefaultHeader:@"X-Parse-Application-Id" value:API_APP_ID];
     [objectManager.HTTPClient setDefaultHeader:@"X-Parse-REST-API-Key" value:API_APP_TOKEN];
     
@@ -247,19 +244,43 @@
 //    [[RKValueTransformer defaultValueTransformer] insertValueTransformer:dateFormatter atIndex:0];
     
     // Register our mappings with the provider
+    RKObjectMapping *errorMapping = [RKObjectMapping mappingForClass:[RKErrorMessage class]];
+    
+    [errorMapping addPropertyMapping:[RKAttributeMapping attributeMappingFromKeyPath:nil toKeyPath:@"errorMessage"]];
+    RKResponseDescriptor *errorDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:errorMapping method:RKRequestMethodGET pathPattern:nil keyPath:@"error" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassClientError)];
+    
     RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:bookMapping
                                                                                             method:RKRequestMethodGET
                                                                                        pathPattern:nil
                                                                                            keyPath:@"results"
                                                                                        statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    [objectManager addResponseDescriptor:responseDescriptor];
-
+    
+    RKResponseDescriptor *postResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:bookMapping
+                                                                                            method:RKRequestMethodGET
+                                                                                       pathPattern:nil
+                                                                                           keyPath:nil
+                                                                                       statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+//    [objectManager addResponseDescriptor:responseDescriptor];
+    [objectManager addResponseDescriptorsFromArray:@[errorDescriptor, responseDescriptor, postResponseDescriptor]];
+    
+    //http://stackoverflow.com/questions/15089405/restkit-0-20-post-coredata-relationship-with-foreign-key
+    RKObjectMapping *requestMapping = [RKObjectMapping requestMapping];
+//    RKEntityMapping *albumRelationshipMapping = [RKEntityMapping mappingForEntityForName:@"Album" inManagedObjectStore:managedObjectStore];
+//    [albumRelationshipMapping addAttributeMappingsFromDictionary:@{@"id": @"albumID", }];
+    [requestMapping addAttributeMappingsFromDictionary:[Book dictionaryForResponseMapping]];
+//    [requestMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"album"
+//                                                                                   toKeyPath:@"album"
+//                                                                                 withMapping:albumRelationshipMapping]];
+    
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Book class] rootKeyPath:nil method:RKRequestMethodPOST];
+    
+    [objectManager addRequestDescriptor:requestDescriptor];
+   
     /**
      Complete Core Data stack initialization
      */
     [managedObjectStore createPersistentStoreCoordinator];
     NSString *storePath = [RKApplicationDataDirectory() stringByAppendingPathComponent:@"CoreDataBooks.CDBStore"];
-//    NSString *seedPath = [[NSBundle mainBundle] pathForResource:@"CoreDataBooks" ofType:@"CDBStore"];
     NSError *error;
     NSPersistentStore *persistentStore = [managedObjectStore addSQLitePersistentStoreAtPath:storePath fromSeedDatabaseAtPath:nil withConfiguration:nil options:nil error:&error];
     NSAssert(persistentStore, @"Failed to add persistent store with error: %@", error);

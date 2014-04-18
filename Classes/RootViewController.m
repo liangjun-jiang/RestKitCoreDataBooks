@@ -73,8 +73,8 @@
 #pragma mark - View lifecycle
 - (void)loadData
 {
-    [[RKObjectManager sharedManager] getObjectsAtPath:@"/1/classes/Book" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        RKLogInfo(@"Load complete: Table should refresh...%@", mappingResult);
+    [[RKObjectManager sharedManager] getObjectsAtPath:@"classes/Book" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+//        RKLogInfo(@"Load complete: Table should refresh...%@", mappingResult);
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"LastUpdatedAt"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
@@ -322,12 +322,15 @@
         addViewController.delegate = self;
         
         // Create a new managed object context for the new book; set its parent to the fetched results controller's context.
-        NSManagedObjectContext *addingContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        [addingContext setParentContext:[self.fetchedResultsController managedObjectContext]];
+//        NSManagedObjectContext *addingContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+//        [addingContext setParentContext:[self.fetchedResultsController managedObjectContext]];
         
-        Book *newBook = (Book *)[NSEntityDescription insertNewObjectForEntityForName:@"Book" inManagedObjectContext:addingContext];
+//        Book *newBook = (Book *)[NSEntityDescription insertNewObjectForEntityForName:@"Book" inManagedObjectContext:addingContext];
+//        addViewController.book = newBook;
+//        addViewController.managedObjectContext = addingContext;
+        Book *newBook = (Book *)[NSEntityDescription insertNewObjectForEntityForName:@"Book" inManagedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext];
         addViewController.book = newBook;
-        addViewController.managedObjectContext = addingContext;
+        addViewController.managedObjectContext = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
     }
     
     if ([[segue identifier] isEqualToString:@"ShowSelectedBook"]) {
@@ -365,6 +368,8 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
+        
+        
 
         if (![[self.fetchedResultsController managedObjectContext] save:&error]) {
             /*
