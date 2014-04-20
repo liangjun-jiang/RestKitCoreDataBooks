@@ -1,25 +1,21 @@
 //
-//  Book.m
+//  Tag.m
 //  CoreDataBooks
 //
 //  Created by Liangjun Jiang on 4/20/14.
 //
 //
 
-#import "Book.h"
 #import "Tag.h"
-#import "User.h"
+#import "Book.h"
 
 
-@implementation Book
+@implementation Tag
 
-@dynamic title;
-@dynamic author;
-@dynamic copyright;
+@dynamic name;
 @dynamic objectId;
 @dynamic createdAt;
 @dynamic updatedAt;
-@dynamic user;
-@dynamic tags;
+@dynamic book;
 
 @end
