@@ -37,6 +37,7 @@
 		7D90EB171901C4C200825FF9 /* User+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D90EB161901C4C200825FF9 /* User+Addition.m */; };
 		7D90EB1D19041A1E00825FF9 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D90EB1C19041A1E00825FF9 /* Tag.m */; };
 		7D90EB2019041A4400825FF9 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D90EB1F19041A4400825FF9 /* Book.m */; };
+		7D90EB2319041D4D00825FF9 /* Tag+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D90EB2219041D4D00825FF9 /* Tag+Addition.m */; };
 		DC6743904BA74DF2B3B20CF5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E03401639F214B00B46C3537 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,8 @@
 		7D90EB1C19041A1E00825FF9 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tag.m; path = Classes/Tag.m; sourceTree = "<group>"; };
 		7D90EB1E19041A4400825FF9 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Book.h; path = Classes/Book.h; sourceTree = "<group>"; };
 		7D90EB1F19041A4400825FF9 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Book.m; path = Classes/Book.m; sourceTree = "<group>"; };
+		7D90EB2119041D4D00825FF9 /* Tag+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Tag+Addition.h"; path = "Classes/Tag+Addition.h"; sourceTree = "<group>"; };
+		7D90EB2219041D4D00825FF9 /* Tag+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Tag+Addition.m"; path = "Classes/Tag+Addition.m"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		E03401639F214B00B46C3537 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -167,6 +170,8 @@
 				7D90EB1C19041A1E00825FF9 /* Tag.m */,
 				7D90EB1E19041A4400825FF9 /* Book.h */,
 				7D90EB1F19041A4400825FF9 /* Book.m */,
+				7D90EB2119041D4D00825FF9 /* Tag+Addition.h */,
+				7D90EB2219041D4D00825FF9 /* Tag+Addition.m */,
 			);
 			name = "Model Class";
 			sourceTree = "<group>";
@@ -334,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D90EB1D19041A1E00825FF9 /* Tag.m in Sources */,
+				7D90EB2319041D4D00825FF9 /* Tag+Addition.m in Sources */,
 				7D90EB141901C46400825FF9 /* User.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				7D90EB171901C4C200825FF9 /* User+Addition.m in Sources */,

@@ -11,11 +11,11 @@
 @implementation User (Addition)
 +(NSArray *)arrayMappingResponse
 {
-    return @[@"objectId",@"username",@"password",@"authData",@"email", @"createdAt",@"updatedAt"];
+    return @[@"objectId",@"username",@"password",@"authData",@"email", @"createdAt",@"updatedAt",@"sessionToken",@"__type", @"className"];
 }
 
 +(NSDictionary *)dictionaryMappingResponse
 {
-    return @{@"objectId":@"objectId",@"username":@"username",@"password":@"password",@"authData":@"authData",@"email":@"email", @"createdAt":@"createdAt",@"updatedAt":@"updatedAt"};
+    return @{@"objectId":@"objectId",@"username":@"username",@"password":@"password",@"authData":@"authData",@"email":@"email", @"createdAt":@"createdAt",@"updatedAt":@"updatedAt", @"sessionToken":@"sessionToken"};
 }
 @end
