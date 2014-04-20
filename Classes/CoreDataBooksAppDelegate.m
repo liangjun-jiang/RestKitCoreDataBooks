@@ -82,13 +82,16 @@
     
     RKEntityMapping *userMapping = [RKEntityMapping mappingForEntityForName:@"User" inManagedObjectStore:managedObjectStore];
     [userMapping addAttributeMappingsFromDictionary:[User dictionaryMappingResponse]];
+    
     RKObjectMapping *userRequestMapping = [RKObjectMapping requestMapping];
     [userRequestMapping addAttributeMappingsFromDictionary:[User dictionaryMappingResponse]];
+    
     RKRequestDescriptor *userPostDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:userRequestMapping objectClass:[User class] rootKeyPath:nil method:RKRequestMethodPOST];
     
     RKEntityMapping *bookMapping = [RKEntityMapping mappingForEntityForName:@"Book" inManagedObjectStore:managedObjectStore];
     bookMapping.identificationAttributes=@[@"objectId"];
     [bookMapping addAttributeMappingsFromArray:[Book arrayForResponseMapping]];
+    [bookMapping addRelationshipMappingWithSourceKeyPath:@"user" mapping:userMapping];
     
 //    NSDateFormatter *dateFormatter = [NSDateFormatter new];
 //    dateFormatter.dateFormat = @"E MMM d HH:mm:ss Z y";
@@ -106,6 +109,12 @@
                                                                                        pathPattern:nil
                                                                                            keyPath:@"results"
                                                                                        statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    
+//    RKResponseDescriptor *usersResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:userMapping
+//                                                                                            method:RKRequestMethodGET
+//                                                                                       pathPattern:nil
+//                                                                                           keyPath:@"results"
+//                                                                                       statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
     RKResponseDescriptor *postResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:bookMapping
                                                                                             method:RKRequestMethodGET
@@ -126,6 +135,7 @@
     RKObjectMapping *requestMapping = [RKObjectMapping requestMapping];
 
     [requestMapping addAttributeMappingsFromDictionary:[Book dictionaryForResponseMapping]];
+    // this gonna be tricky
     [requestMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"user"
                                                                                    toKeyPath:@"user"
                                                                                  withMapping:userMapping]];

@@ -16,7 +16,7 @@
 
 +(NSDictionary *)dictionaryForResponseMapping
 {
-    return @{@"title":@"title",@"author":@"author", @"copyright":@"copyright",@"sessionToken":@"sessionToken"};
+    return @{@"title":@"title",@"author":@"author", @"copyright":@"copyright",@"sessionToken":@"sessionToken",@"user":@"user.objectId"};
     
 }
 @end
