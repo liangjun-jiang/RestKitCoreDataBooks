@@ -10,12 +10,14 @@
 #import "DetailViewController.h"
 #import "Book.h"
 #import "User.h"
+#import "Tag+Addition.h"
 
 @interface RootViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
 @property (nonatomic, strong) User *user;
+@property (nonatomic, strong) Tag *tag;
 @end
 
 
@@ -28,7 +30,7 @@
 - (void)loadData
 {
     [[RKObjectManager sharedManager] getObjectsAtPath:@"classes/Book" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-//        RKLogInfo(@"Load complete: Table should refresh...%@", mappingResult);
+        RKLogInfo(@"Load complete: Table should refresh...%@", mappingResult);
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"LastUpdatedAt"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
@@ -37,29 +39,50 @@
     
 }
 
-- (void)createAUser
+//- (void)createAUser
+//{
+//    self.user = (User *)[NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext];
+//    self.user.username = @"LJiang6";
+//    self.user.password = @"secret6";
+//    self.user.email = @"ljiang6@ljapps.com";
+//    
+//    [[RKObjectManager sharedManager] postObject:self.user path:@"/1/users" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+//        RKLogInfo(@"so the user is : %@",self.user);
+//    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+//        RKLogError(@"Load failed with error: %@", error);
+//    }];
+//}
+
+//-(void)loadUser
+//{
+//    
+//    [[RKObjectManager sharedManager] getObjectsAtPath:@"/1/users" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+//        self.user = [mappingResult.array firstObject];
+//        RKLogInfo(@"Load First User %@", self.user);
+//    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+//        RKLogError(@"Load failed with error: %@", error);
+//    }];
+//    
+//}
+
+-(void)creaeTag
 {
-    self.user = (User *)[NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext];
-    self.user.username = @"LJiang4";
-    self.user.password = @"secret4";
-    self.user.email = @"ljiang4@ljapps.com";
     
-    [[RKObjectManager sharedManager] postObject:self.user path:@"/1/users" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-         RKLogInfo(@"Load complete: Table should refresh...%@", [mappingResult.array firstObject]);
-        NSLog(@"so the user is : %@",self.user);
-    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+    Tag *newTag = (Tag *)[NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext];
+    newTag.name = @"Sci-Fi";
+    [[RKObjectManager sharedManager] postObject:self.user path:@"/1/classes/tag" parameters:nil success:nil failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Load failed with error: %@", error);
     }];
+
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // Set up the edit and add buttons.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-    [self createAUser];
-    
-    
+//    [self createAUser];
     NSError *error;
     if (![[self fetchedResultsController] performFetch:&error]) {
         /*
@@ -202,9 +225,6 @@
     NSArray *sortDescriptors = @[authorDescriptor, titleDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
-    // Create and initialize the fetch results controller.
-//    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"author" cacheName:@"Root"];
-    
     _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                         managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext
                                           sectionNameKeyPath:nil
@@ -302,7 +322,8 @@
 //        addViewController.book = newBook;
 //        addViewController.managedObjectContext = addingContext;
         Book *newBook = (Book *)[NSEntityDescription insertNewObjectForEntityForName:@"Book" inManagedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext];
-        newBook.user = self.user;
+        
+//        newBook.user = self.user;
         addViewController.book = newBook;
         addViewController.managedObjectContext = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
     }
@@ -344,8 +365,6 @@
             abort();
         }
         
-        
-
         if (![[self.fetchedResultsController managedObjectContext] save:&error]) {
             /*
              Replace this implementation with code to handle the error appropriately.
