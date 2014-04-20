@@ -11,7 +11,7 @@
 @implementation User (Addition)
 +(NSArray *)arrayMappingResponse
 {
-    return @[@"objectId",@"username",@"password",@"authData",@"email", @"createdAt",@"updatedAt",@"sessionToken"];
+    return @[@"objectId",@"username",@"password",@"authData",@"email", @"createdAt",@"updatedAt",@"sessionToken",@"__type", @"className"];
 }
 
 +(NSDictionary *)dictionaryMappingResponse

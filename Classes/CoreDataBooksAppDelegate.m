@@ -13,6 +13,7 @@
 #import "RKValueTransformers.h"
 #import <RestKit/RestKit.h>
 #import "User+Addition.h"
+#import "Tag+Addition.h"
 @interface CoreDataBooksAppDelegate ()
 
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
@@ -67,6 +68,8 @@
 
 - (void)setupEntityMapping
 {
+    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
+    
     NSURL *baseURL = [NSURL URLWithString:API_BASE_URL];
     RKObjectManager *objectManager = [RKObjectManager managerWithBaseURL:baseURL];
     objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
@@ -83,15 +86,29 @@
     RKEntityMapping *userMapping = [RKEntityMapping mappingForEntityForName:@"User" inManagedObjectStore:managedObjectStore];
     [userMapping addAttributeMappingsFromDictionary:[User dictionaryMappingResponse]];
     
-    RKObjectMapping *userRequestMapping = [RKObjectMapping requestMapping];
-    [userRequestMapping addAttributeMappingsFromDictionary:[User dictionaryMappingResponse]];
+//    RKObjectMapping *userRequestMapping = [RKObjectMapping requestMapping];
+//    [userRequestMapping addAttributeMappingsFromDictionary:[User dictionaryMappingResponse]];
+//    
+//    RKRequestDescriptor *userPostDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:userRequestMapping objectClass:[User class] rootKeyPath:nil method:RKRequestMethodPOST];
     
-    RKRequestDescriptor *userPostDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:userRequestMapping objectClass:[User class] rootKeyPath:nil method:RKRequestMethodPOST];
+    RKEntityMapping *tagMapping = [RKEntityMapping mappingForEntityForName:@"Tag" inManagedObjectStore:managedObjectStore];
+    tagMapping.identificationAttributes = @[@"objectId"];
+    [tagMapping addAttributeMappingsFromArray:[Tag arrayForResponseMapping]];
     
     RKEntityMapping *bookMapping = [RKEntityMapping mappingForEntityForName:@"Book" inManagedObjectStore:managedObjectStore];
     bookMapping.identificationAttributes=@[@"objectId"];
     [bookMapping addAttributeMappingsFromArray:[Book arrayForResponseMapping]];
-    [bookMapping addRelationshipMappingWithSourceKeyPath:@"user" mapping:userMapping];
+//    [bookMapping addAttributeMappingsFromDictionary:[Book dictionaryForResponseMapping]];
+    [bookMapping addRelationshipMappingWithSourceKeyPath:@"tags" mapping:tagMapping];
+    
+    //user mapping
+    [bookMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"user"
+                                                                                   toKeyPath:@"user"
+                                                                                 withMapping:userMapping]];
+    
+//    NSEntityDescription *projectEntity = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:managedObjectContext];
+//    NSRelationshipDescription *userRelationship = [projectEntity relationshipsByName][@"user"];
+//    RKConnectionDescription *connection = [[RKConnectionDescription alloc] initWithRelationship:userRelationship attributes:@{ @"userID": @"userID" }];
     
 //    NSDateFormatter *dateFormatter = [NSDateFormatter new];
 //    dateFormatter.dateFormat = @"E MMM d HH:mm:ss Z y";
@@ -110,11 +127,7 @@
                                                                                            keyPath:@"results"
                                                                                        statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
-//    RKResponseDescriptor *usersResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:userMapping
-//                                                                                            method:RKRequestMethodGET
-//                                                                                       pathPattern:nil
-//                                                                                           keyPath:@"results"
-//                                                                                       statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    
     
     RKResponseDescriptor *postResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:bookMapping
                                                                                             method:RKRequestMethodGET
@@ -131,22 +144,14 @@
     
     [objectManager addResponseDescriptorsFromArray:@[errorDescriptor, responseDescriptor, postResponseDescriptor,userpostResponseDescriptor]];
     
-    //http://stackoverflow.com/questions/15089405/restkit-0-20-post-coredata-relationship-with-foreign-key
+    // Do we need to have this?
     RKObjectMapping *requestMapping = [RKObjectMapping requestMapping];
-
     [requestMapping addAttributeMappingsFromDictionary:[Book dictionaryForResponseMapping]];
-    // this gonna be tricky
-    [requestMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"user"
-                                                                                   toKeyPath:@"user"
-                                                                                 withMapping:userMapping]];
-    
+
     RKRequestDescriptor *postDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Book class] rootKeyPath:nil method:RKRequestMethodPOST];
-    
-    
-    
     RKRequestDescriptor *putDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Book class] rootKeyPath:nil method:RKRequestMethodPUT];
     RKRequestDescriptor *deleteDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Book class] rootKeyPath:nil method:RKRequestMethodDELETE];
-    [objectManager addRequestDescriptorsFromArray:@[postDescriptor, putDescriptor, deleteDescriptor,userPostDescriptor]];
+    [objectManager addRequestDescriptorsFromArray:@[postDescriptor, putDescriptor, deleteDescriptor]];
 
     
     
