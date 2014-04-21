@@ -68,7 +68,7 @@
 
 - (void)setupEntityMapping
 {
-    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
+//    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
     
     NSURL *baseURL = [NSURL URLWithString:API_BASE_URL];
     RKObjectManager *objectManager = [RKObjectManager managerWithBaseURL:baseURL];

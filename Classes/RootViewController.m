@@ -29,7 +29,8 @@
 #pragma mark - View lifecycle
 - (void)loadData
 {
-    [[RKObjectManager sharedManager] getObjectsAtPath:@"classes/Book" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+//    NSDictionary *filter = @{@"--data-urlencode":@"include=tags"};
+    [[RKObjectManager sharedManager] getObjectsAtPath:@"classes/Book?include=tags&&include=user" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         RKLogInfo(@"Load complete: Table should refresh...%@", mappingResult);
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"LastUpdatedAt"];
         [[NSUserDefaults standardUserDefaults] synchronize];
